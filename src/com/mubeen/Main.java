@@ -1,7 +1,7 @@
 package com.mubeen;
 
 /*
-    *Video Store
+    * Video Store
     * The store sells movies and lets the user rent/return them.
     * The store starts by adding movies to its collections.
     * A movie is described by its name,format,rating.
@@ -13,5 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        Movie movie = new Movie("XD","DVD",4.5);
+        System.out.println(movie);
+
     }
 }
