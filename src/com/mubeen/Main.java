@@ -14,7 +14,11 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         Movie movie = new Movie("XD","DVD",4.5);
-        System.out.println(movie);
+
+        Store store = new Store();
+
+        store.Action("XD","Sell");
+        System.out.println(store.getMovie(0));
 
     }
 }
