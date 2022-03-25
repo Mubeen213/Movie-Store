@@ -23,6 +23,7 @@ public class Movie {
         this.rating = rating;
         this.rentalPrice = format.equalsIgnoreCase("Blue-ray")?4.25 : 2.25;
         this.sellingPrice = format.equalsIgnoreCase("Blue-ray")? 1.99 : 0.99;
+        this.isAvailable = true;
     }
 
     public Movie(Movie movie){
@@ -46,7 +47,7 @@ public class Movie {
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return this.isAvailable;
     }
 
     public double getRentalPrice() {

@@ -13,15 +13,23 @@ public class Store {
           this.movies.add(index,new Movie(movie));
       }
 
-      public Movie getMovie(int index){
-          return new Movie(this.movies.get(index));
+      public Movie getMovie(String name){
+          for (int i = 0; i < this.movies.size(); i++) {
+              if(this.movies.get(i).getName().equals(name)){
+                  return new Movie(this.movies.get(i));
+              }
+          }
+          return null;
       }
 
+      public Movie getMovie(int index){
+          return new Movie(movies.get(index));
+      }
       public void addMovies(Movie movie){
           this.movies.add(new Movie(movie));
       }
 
-      public void Action(String name, String action){
+      public void action(String name, String action){
          if(this.movies.isEmpty()){
              throw  new IllegalStateException("Movie Store is empty");
          }
@@ -43,8 +51,10 @@ public class Store {
                           break;
                       case "Rent":
                           this.movies.get(i).setAvailable(false);
+                          break;
                       case "Return":
                           this.movies.get(i).setAvailable(true);
+                          break;
                   }
               }
           }

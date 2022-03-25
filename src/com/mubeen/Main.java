@@ -21,11 +21,63 @@ public class Main {
 
         try{
             loadMovies("Resources/movies.txt");
+            System.out.println(store);
+            manageMovies();
         }catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
 
     }
+
+    /**
+     * Name: manageMovies
+     * Inside the function:
+     *   • 1. Starts a new instance of Scanner;
+     *   • 2. In an infinite loop, the user can choose to a) purchase b) rent c) return d) exit.
+     *   •        case a: ask for the name and sell.
+     *   •        case b: ask for the name and rent.
+     *   •        case c: ask for the name and return.
+     *   • 3. call close() from the Scanner object.
+     */
+
+    public static void manageMovies(){
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            System.out.println("\nWould you like to \n\ta) purchase\n\tb) rent \n\tc) return");
+            String response = sc.nextLine();
+            if(!(response.equals("a")||response.equals("b")||response.equals("c"))){
+               sc.close();
+               break;
+            }
+            System.out.println("Enter the movie name: \n");
+            String name = sc.nextLine();
+
+            if(store.getMovie(name)==null){
+                System.out.println("\n\nThe input you provided is not valid. Please try again\n");
+                continue;
+            }
+            switch (response){
+                case "a":
+                    if(!(store.getMovie(name).isAvailable())){
+                        System.out.println("\n\nThe movie is not available for purchase. Please try again\n");
+                         continue;
+                    }
+                    store.action(name,"Sell");
+                    break;
+                case "b":
+                    store.action(name,"Rent");
+                    break;
+                case "c":
+                    store.action(name, "Return");
+                    break;
+
+            }
+            System.out.println("\n\nUPDATED MOVIES\n\n" + store);
+        }
+
+
+    }
+
 
     /**
      * Name: loadMovies
@@ -45,6 +97,6 @@ public class Main {
             String[] words = fullLine.split("--");
             store.addMovies(new Movie(words[0], words[1], Double.parseDouble(words[2])));
         }
-
+        sc.close();
     }
 }
