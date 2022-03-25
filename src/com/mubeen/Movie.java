@@ -8,7 +8,7 @@ public class Movie {
     private double rentalPrice;
     private boolean isAvailable;
 
-    Movie(String name, String format, double rating){
+    public Movie(String name, String format, double rating){
         if(name==null||name.isBlank()){
             throw new IllegalArgumentException("Name cannot be empty");
         }

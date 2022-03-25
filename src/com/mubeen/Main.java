@@ -1,5 +1,9 @@
 package com.mubeen;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /*
     * Video Store
     * The store sells movies and lets the user rent/return them.
@@ -11,14 +15,36 @@ package com.mubeen;
  */
 public class Main {
 
+    static Store store = new Store();
     public static void main(String[] args) {
 	// write your code here
-        Movie movie = new Movie("XD","DVD",4.5);
 
-        Store store = new Store();
+        try{
+            loadMovies("Resources/movies.txt");
+        }catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
 
-        store.Action("XD","Sell");
-        System.out.println(store.getMovie(0));
+    }
+
+    /**
+     * Name: loadMovies
+     * @param fileName (String)
+     * @throws FileNotFoundException
+     *
+     * Inside the function:
+     *   • 1. loads movies from <fileName>.txt.
+     *   • 2. adds all movies to the store object's movie field.
+     */
+
+    public static void loadMovies(String fileName)throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(fileName);
+        Scanner sc = new Scanner(fis);
+        while(sc.hasNextLine()){
+            String fullLine = sc.nextLine();
+            String[] words = fullLine.split("--");
+            store.addMovies(new Movie(words[0], words[1], Double.parseDouble(words[2])));
+        }
 
     }
 }
